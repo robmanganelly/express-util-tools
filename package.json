@@ -1,0 +1,15 @@
+{
+  "name": "express-utility-suite",
+  "version": "1.0.0",
+  "description": "This package contains some utility functions to be used when building express applications",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "express",
+    "util"
+  ],
+  "author": "robmanganelly@gmail.com",
+  "license": "MIT"
+}
