@@ -32,8 +32,13 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
+      - run: _auth=$NODE_AUTH_TOKEN >> .npmrc
+      - run: email=$NPM_EMAIL >> .npmrc
+      - run: always-auth=true >> .npmrc
+      # - run: cat .npmrc
       - run: npm ci
       - run: npm version patch
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          NPM_EMAIL: ${{secrets.npm_email}}
