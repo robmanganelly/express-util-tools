@@ -9,7 +9,7 @@ const { envelop } = require('./../envelop/envelop');
  * @param { Object } err 
  * @returns 
  */
-const topLevel = (req, res, next, err)=>{
+const topLevel = (err, req, res, next)=>{
 
     let __error;
 
