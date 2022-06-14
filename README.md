@@ -56,6 +56,7 @@ module.exports.putResource = catchAsync(putResourceBuilder(...args))
 
 
 ### The AppError constructor
+
 Even if you can define your own Error instances, this module provides a simple Error constructor to avoid the developer to reinvent the wheel.
 
 With this constructor you can easily define your operational errors and debug them during development phase
