@@ -34,6 +34,8 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org/'
       - run: npm ci
+      - run: git config user.email=rlothbrock.10@gmail.com
+      - run: git config user.name=robb_stark
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
