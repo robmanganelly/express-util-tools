@@ -62,7 +62,7 @@ Even if you can define your own Error instances, this module provides a simple E
 With this constructor you can easily define your operational errors and debug them during development phase
 
 ```javascript
-const { AppError } = require('express-util-tools);
+const { AppError } = require('express-util-tools');
 
 const getSomeResource = async(req, res, next)=>{
 
