@@ -11,11 +11,18 @@ const { envelop } = require('./../envelop/envelop');
  */
 const topLevel = (err, req, res, next)=>{
 
-    let __error;
+    let error;
 
-    __error =  !err.status ? new DefaultAppError(500) : {...err};
+    error = (!err.status)? new DefaultAppError(500) : err;
+    console.log(error);
 
-    return envelop(res,err.status, {error:__error},__error.message);
+    let devError = {message: error.message, status:error.status, stack: err.stack };
+    let prodError = {message: error.message, status:error.status};
+    
+    return envelop(res,error.status, 
+        {error: process.env.NODE_ENV === 'production' ? prodError : devError },
+        error.message
+        );
 
 }
 
