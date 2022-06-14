@@ -1,6 +1,6 @@
 {
-  "name": "express-util-tool",
-  "version": "1.0.0",
+  "name": "express-util-tools",
+  "version": "1.0.1",
   "description": "This package contains some utility functions to be used when building express applications",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,10 @@
     "express",
     "util"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robmanganelly/express-util-tools"
+  },
   "author": "robmanganelly@gmail.com",
   "license": "MIT"
 }

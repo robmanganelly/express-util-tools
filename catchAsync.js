@@ -17,7 +17,7 @@ function _catchAsyncConstructor(errorClass){
 
 
 module.exports.catchAsync = (handler)=>{
-   return _catchAsyncConstructor(DefaultAppError);
+   return _catchAsyncConstructor(DefaultAppError)(handler);
 };
 
 
