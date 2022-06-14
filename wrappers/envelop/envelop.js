@@ -3,11 +3,11 @@ const build = require('./auxiliar');
 
 /**
  * This function wraps and serialize the server response.
- * @param { HttpResponse } res 
+ * @param { Object } res 
  * @param { Number } httpStatus 
  * @param { {data: Object} | {error: Error}  } payload 
  * @param { String | undefined } message 
- * @returns {HttpResponse} 
+ * @returns { } 
  */
 const envelop = (res, httpStatus, payload, message)=>{
     
