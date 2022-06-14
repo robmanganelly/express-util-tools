@@ -94,7 +94,7 @@ postSomeResource = async (req, res, next)=>{
     //...logic here to create the resource
     const resource = {foo:'bar'} // some resource
 
-    return envelop(res, 201, {data: resource})
+    return envelop(res, 201, {data: resource});
 
 }
 
@@ -105,10 +105,9 @@ getSomeResource = async (req, res, next)=>{
     //...logic here to get the resource
     const resource = {foo:'bar'} // some resource
 
-    const message = 'Resource successfully sent'
+    const message = 'Resource successfully sent';
 
-    // we need to declare an undefined 
-    return envelop(res, 201, {data: resource}, message )
+    return envelop(res, 201, {data: resource}, message );
 
 }
 
