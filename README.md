@@ -53,6 +53,32 @@ module.exports.putResource = catchAsync(putResourceBuilder(...args))
 
 ```
 
+
+
+### The AppError constructor
+Even if you can define your own Error instances, this module provides a simple Error constructor to avoid the developer to reinvent the wheel.
+
+With this constructor you can easily define your operational errors and debug them during development phase
+
+```javascript
+const { AppError } = require('express-util-tools);
+
+const getSomeResource = async(req, res, next)=>{
+
+    const { resourceId } = req.body;
+
+    // you can easy declare different error types
+    if !resourceId return next( new AppError(400,'request malformed'))
+
+    const resource = await Model.findById(req.body.resourceId);
+
+    // Setting a message its optional. The class has a default message for each type.
+    if !resource return next(new AppError(404))
+
+
+}
+```
+
 ### The Envelop Functionalities
 
 Usually we need to serialize the router response, and this feature allows us to do it easily.
