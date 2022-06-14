@@ -23,4 +23,4 @@ module.exports.catchAsync = (handler)=>{
 
 module.exports.catchWithCustomError = (customErrorClass)=>{
     return _catchAsyncConstructor(customErrorClass);
-}
+};

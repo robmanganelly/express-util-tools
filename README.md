@@ -52,3 +52,37 @@ module.exports.putResource = catchAsync(putResourceBuilder(...args))
 
 
 ```
+
+### The Envelop Functionalities
+
+Usually we need to serialize the router response, and this feature allows us to do it easily.
+
+```javascript
+const tools = require('express-util-tools);
+
+const { envelop} = tools;
+
+postSomeResource = async (req, res, next)=>{
+
+    //...logic here to create the resource
+    const resource = {foo:'bar'} // some resource
+
+    return envelop(res, 201, {data: resource})
+
+}
+
+//we can optionally define a custom message
+
+getSomeResource = async (req, res, next)=>{
+
+    //...logic here to get the resource
+    const resource = {foo:'bar'} // some resource
+
+    const message = 'Resource successfully sent'
+
+    // we need to declare an undefined 
+    return envelop(res, 201, {data: resource}, message )
+
+}
+
+```
