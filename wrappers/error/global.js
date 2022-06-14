@@ -13,7 +13,7 @@ const topLevel = (err, req, res, next)=>{
 
     let __error;
 
-    __error =  !err.status ? new DefaultAppError(500) : err;
+    __error =  !err.status ? new DefaultAppError(500) : {...err};
 
     return envelop(res,err.status, {error:__error},__error.message);
 
