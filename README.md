@@ -27,7 +27,7 @@ Meanwhile, the second one allows you to use your own custom error class,
 on your controller's file in **express** routes
 
 ```javascript
-const tools = require('express-util-tools);
+const tools = require('express-util-tools');
 
 const MyErrorClass = require('./path');
 const putResourceBuilder = require('./path');
@@ -85,7 +85,7 @@ const getSomeResource = async(req, res, next)=>{
 Usually we need to serialize the router response, and this feature allows us to do it easily.
 
 ```javascript
-const tools = require('express-util-tools);
+const tools = require('express-util-tools');
 
 const { envelop} = tools;
 
@@ -110,5 +110,20 @@ getSomeResource = async (req, res, next)=>{
     return envelop(res, 201, {data: resource}, message );
 
 }
+
+```
+
+### The Top Level Error
+
+When we use express, we tend to use middleware a lot. Error handling is not the exception, so we need to declare a global error handler middleware in order to catch all operational errors and redirect them to the request-response flow.
+That's why this feature was created, to allow the developer handle the error in a simple way.
+
+```javascript
+const tools = require('express-util-tools');
+//rest of imports
+
+
+//at the end of the middleware chain
+app.use(tools.topLevel)
 
 ```
