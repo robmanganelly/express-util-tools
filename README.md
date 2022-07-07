@@ -4,7 +4,7 @@
 Current main version : **^2.4.0**
 <hr>
 
-This module is intended to provide some common use functions on Express applications, with zero or almost zero dependencies. 
+This module is intended to provide some common use functions on Express applications, with zero or almost zero dependencies.
 
 Usually, when we are building an express application, we tend to code a lot of boilerplate code that we write and rewrite over and over again.
 
