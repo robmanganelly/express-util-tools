@@ -55,14 +55,12 @@ describe('Testing envelopment feature', ()=>{
 
         it('should envelop and serialize payload',()=>{
 
-            res = {status: ()=>{}, json: ()=>{} };
+            //mocking response
+            let res = {status: ()=>{}, json: ()=>{} };
             sinon.stub(res,'status');
             sinon.stub(res,'json');
             res.status.returns(res);
             res.json.callsFake(o=>{res.body=o;return res;});
-
-
-            //mocking response
 
             envelop.envelop(res,200,{foo:'bar'});
 
@@ -78,8 +76,21 @@ describe('Testing envelopment feature', ()=>{
             expect(res.body).to.have.property('message');
             expect(res.body.message).to.be.a.string('success');
 
+        });
 
+        it('should overwrite message',()=>{
 
+            //mocking response
+            let resWithMsg = {status: ()=>{}, json: ()=>{} };
+            sinon.stub(resWithMsg,'status');
+            sinon.stub(resWithMsg,'json');
+            resWithMsg.status.returns(resWithMsg);
+            resWithMsg.json.callsFake(o=>{resWithMsg.body=o;return resWithMsg;});
+
+            envelop.envelop(resWithMsg,200,{foo:'bar'},'my custom message');
+
+            expect(resWithMsg.body).to.have.property('message');
+            expect(resWithMsg.body.message).to.be.a.string('my custom message');
 
         });
 

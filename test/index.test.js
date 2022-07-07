@@ -11,7 +11,7 @@ const {
 describe('Testing for all members to be available',()=>{
  
     it('should export AppError ', ()=>{        
-        expect(new AppError()).instanceOf(Error);
+        expect(new AppError(0)).instanceOf(Error);
     });
     it('should export bodyFilter ', ()=>{        
         expect(bodyFilter).instanceOf(Function);

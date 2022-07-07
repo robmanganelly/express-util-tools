@@ -4,6 +4,11 @@
  * @returns  {String} a string to be used as a message  
  */
 function setMessage(code){
+
+    if(typeof code !== 'number'){
+        throw new Error(`required a valid code, but found ${code}`);
+    }
+
     switch (code) {
         case 400:
             return 'Error!! Bad request';
@@ -37,4 +42,4 @@ class DefaultAppError extends Error {
     }
 }
 
-module.exports = {DefaultAppError};
+module.exports = {DefaultAppError, _setMsg: setMessage};
