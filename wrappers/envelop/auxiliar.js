@@ -5,7 +5,7 @@ function _msgBuilder(status, message){
     }
 
     else if (typeof status !== "number"){
-        return "wrong status and unknown message";
+        throw new Error("wrong status and unknown message");
     }
 
     else {
@@ -46,8 +46,16 @@ function _msgBuilder(status, message){
         return msg;
     }
 }
-
+/**
+ * 
+ * @param  {number} code   
+ * @returns {string}
+ */
 function _statusBuilder(code){
+
+    if (typeof(code)!=='number'){
+        throw Error('unsupported building status with non numerical values');
+    }
 
     let __status = "";
    
@@ -75,9 +83,8 @@ function _statusBuilder(code){
             break;
         
         case 500:
-            msg = "internal server error";
+            __status = "internal server error";
             break;
-
 
         default:
             __status = `unhandled status "${code}"`;
