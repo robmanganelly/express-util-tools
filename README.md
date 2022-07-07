@@ -1,7 +1,7 @@
 # Express-Util-Tools
 
 *by: rlothbrock.10@gmail.com*
-Current main version : **^2.4.0**
+Current main version : **^2.4.1**
 <hr>
 
 This module is intended to provide some common use functions on Express applications, with zero or almost zero dependencies. 
