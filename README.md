@@ -5,7 +5,7 @@
 [![npm version](https://badge.fury.io/js/express-util-tools.svg)](//npmjs.com/package/express-util-tools)
 [![made-with-javascript](https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg)](https://www.javascript.com)
 [![Npm package total downloads](https://badgen.net/npm/dt/express-util-tools)](https://npmjs.com/package/express-util-tools)
-[![Npm package dependents](https://badgen.net/npm/dependents/express-util-tools)](https://npmjs.com/package/express)
+[![Npm package dependents](https://badgen.net/npm/dependents/express-util-tools)](https://npmjs.com/package/express-util-tools)
 <hr>
 
 This module is intended to provide some common use functions on Express applications, with zero or almost zero dependencies. 
