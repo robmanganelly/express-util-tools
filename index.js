@@ -3,8 +3,10 @@ const {catchAsync, catchWithCustomError} = require('./wrappers/error/error');
 const { DefaultAppError } = require('./wrappers/error/defaultAppError');
 const { envelop }  = require('./wrappers/envelop/envelop');
 const { topLevel } = require('./wrappers/error/global');
+const mailer = require('./email/email');
 
-module.exports = { 
+module.exports = {
+    mailer, 
     AppError: DefaultAppError,
     bodyFilter, 
     catchAsync ,
