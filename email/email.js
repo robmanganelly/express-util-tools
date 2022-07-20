@@ -38,7 +38,7 @@ module.exports.basicTransportOptions = (service, ...authOpt)=>{
 module.exports.basicEmailOptions = (...opts)=>{
     const [from, to, subject, text, html] = opts;
     return {from, to, subject, text, html};
-}
+};
 
 
 
