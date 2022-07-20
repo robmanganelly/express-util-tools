@@ -46,14 +46,18 @@ module.exports.basicEmailOptions = (...opts)=>{
     if(opts.length < 1) throw Error('incorrect options');
 
     opts.forEach(
-        option=>{if(option && typeof(option) !== 'string') throw Error('incorrect options');}
+      option=>{if(option && typeof(option) !== 'string') throw Error('incorrect options');}
     );
-
+    
+    
     const [from, to, subject, text, html] = opts;
-
     if (!(from && to && (text || html))) throw Error('incorrect options');
+    
+    let options = {from, to, subject, text, html};
 
-    return {from, to, subject, text, html};
+    Object.keys(options).forEach(key => !options[key] && delete options[key])
+
+    return  options;
 };
 
 //==========================================================
