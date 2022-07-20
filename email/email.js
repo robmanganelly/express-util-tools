@@ -29,7 +29,7 @@ module.exports.basicTransportOptions = (service, ...authOpt)=>{
  * @param  {...string} auth 
  * @returns TransportOptions
  */
- module.exports.sendGridTransportOptions = (...auth)=>this.basicTransportOptions('sendGrid',auth);
+ module.exports.sendGridTransportOptions = (...auth)=>this.basicTransportOptions('sendGrid',...auth);
 
 //==========================================================
 //              Email options section
@@ -42,7 +42,17 @@ module.exports.basicTransportOptions = (service, ...authOpt)=>{
  * At any case, you should prevent user to inject scripts into the template.
  */
 module.exports.basicEmailOptions = (...opts)=>{
+    
+    if(opts.length < 1) throw Error('incorrect options');
+
+    opts.forEach(
+        option=>{if(option && typeof(option) !== 'string') throw Error('incorrect options');}
+    );
+
     const [from, to, subject, text, html] = opts;
+
+    if (!(from && to && (text || html))) throw Error('incorrect options');
+
     return {from, to, subject, text, html};
 };
 

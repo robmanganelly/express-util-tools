@@ -12,7 +12,6 @@ describe('Testing email feature',()=>{
         expect(email).to.have.property('test');
     });
 
-
     describe('testing basicTransportOptions',()=>{
         const options = email.basicTransportOptions;
         const mockOptWithKeys = {service: 'foo', auth: {auth_key: 'bar'}};
@@ -33,10 +32,38 @@ describe('Testing email feature',()=>{
 
         });
     });
-
-    // describe('testing basicEmailOptions',()=>{
-    //     const options = email.basicEmailOptions;
+    
+    describe('testing sendGridTransportOptions',()=>{
+        const options = email.sendGridTransportOptions;
+        const mockOptWithKeys = {service: 'sendGrid', auth: {auth_key: 'bar'}};
+        const mockOptWithPass = {service: 'sendGrid', auth: {user: 'bar', pass: 'baz'}};
         
-    //     it()
-    // });
+        it('should be a function',()=>{
+            expect(options).instanceOf(Function);
+        });
+
+        it('should return correct options',()=>{
+            expect(()=>options()).to.throw('incorrect options');
+            expect(()=>options(['foo'])).to.throw('incorrect options');
+            expect(()=>options(['foo'],'bar')).to.throw('incorrect options');
+            expect(options('bar')).to.be.deep.equal(mockOptWithKeys);
+            expect(options('bar','baz')).to.be.deep.equal(mockOptWithPass);
+            
+        });
+    });
+
+    describe('testing basicEmailOptions', () => { 
+        const options = email.basicEmailOptions;
+
+        it('should be a function',()=>{
+            expect(options).instanceOf(Function);
+        });
+
+        it('should export correct options',()=>{
+            expect(()=>options()).to.throw('incorrect options');
+            expect(()=>options(1)).to.throw('incorrect options');
+            expect(()=>options([1],'foo')).to.throw('incorrect options');
+            expect(()=>options(undefined)).to.throw('incorrect options');
+        });
+     });
 })
