@@ -131,3 +131,8 @@ const tools = require('express-util-tools');
 app.use(tools.topLevel)
 
 ```
+
+### Road map
+
+Email Feature:
+easily configure email and build basic email templates with zero or almost zero dependencies.
