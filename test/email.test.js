@@ -13,6 +13,7 @@ describe('Testing email feature',()=>{
         expect(email).to.have.property('create');
         expect(email).to.have.property('sendGridTransportOptions');
         expect(email).to.have.property('test');
+        expect(email).to.have.property('buildHTML');
     });
 
     describe('testing basicTransportOptions',()=>{
