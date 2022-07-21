@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const fs = require('fs/promises');
 
 //==========================================================
 //              Transport options section
@@ -55,7 +56,7 @@ module.exports.basicEmailOptions = (...opts)=>{
     
     let options = {from, to, subject, text, html};
 
-    Object.keys(options).forEach(key => !options[key] && delete options[key])
+    Object.keys(options).forEach(key => !options[key] && delete options[key]);
 
     return  options;
 };
@@ -107,3 +108,47 @@ class Test extends Mailer{
 
 module.exports.test = Test;
 module.exports.create = Mailer;
+
+// ============================================================
+//                      Email builder section
+// ============================================================
+/**
+ * Builds the html template to send an email.
+ * 
+ * It is recommended the user provides the path using the `path` package and ` __dirname`. 
+ * This function won't try to guess the right path.
+ * 
+ * Example:
+ * ```javascript 
+ * const path = require('path');
+ * 
+ * buildHTML(path.join(__dirname,'myFile.html'))
+ * ```
+ * 
+ * @param {string} path 
+ * @param  {any[]} data
+ * @param {{interpolation: string, styles:string}} _options 
+ */
+ module.exports.buildHTML =  async function(path,data,options){
+
+    let _options = { interpolation: '{{}}', ...options};
+
+    const template = await fs.readFile(path,{encoding: 'utf-8'});
+    
+    let assembled = template
+    .split(_options.interpolation)
+    .map((c,i)=>`${c}${data[i] ?? ''}`)
+    .join('');
+
+    if (_options.styles && typeof(_options.styles) === 'string'){    
+        assembled = assembled.replace('</head>',
+        `\t<style>\n
+        \t\t${await fs.readFile(_options.styles,{encoding: 'utf-8'})}
+        \t</style>
+        </head>`);
+    }
+    //sanitizing
+    assembled = assembled.replace(/<script.*<\/script>/,'');
+
+    return assembled;
+};
