@@ -36,7 +36,7 @@ function setMessage(code){
  */
 class DefaultAppError extends Error {
     constructor(code, message){
-        super(!message ? setMessage(code) : message);
+        super( message ?? setMessage(code) );
         this.status = code;
         Error.captureStackTrace(this, this.constructor);
     }
