@@ -24,6 +24,6 @@ const topLevel = (err, req, res, next)=>{
         error.message
         );
 
-}
+};
 
 module.exports = { topLevel};
