@@ -18,7 +18,6 @@ describe('Testing email feature',()=>{
 
     describe('testing basicTransportOptions',()=>{
         const options = email.basicTransportOptions;
-        const mockOptWithKeys = {service: 'foo', auth: {auth_key: 'bar'}};
         const mockOptWithPass = {service: 'foo', auth: {user: 'bar', pass: 'baz'}};
 
         it('should be a function',()=>{
@@ -29,8 +28,8 @@ describe('Testing email feature',()=>{
             expect(()=>options()).to.throw('incorrect options');
             expect(()=>options('foo')).to.throw('incorrect options');
             expect(()=>options(['foo','bar'])).to.throw('incorrect options');
+            expect(()=>options('foo','bar')).to.throw('incorrect options');
             expect(()=>options({foo:'foo'},'bar')).to.throw('incorrect options');
-            expect(options('foo','bar')).to.be.deep.equal(mockOptWithKeys);
             expect(options('foo','bar','baz')).to.be.deep.equal(mockOptWithPass);
             expect(options('foo','bar','baz','mute')).to.be.deep.equal(mockOptWithPass);
 
@@ -39,8 +38,7 @@ describe('Testing email feature',()=>{
     
     describe('testing sendGridTransportOptions',()=>{
         const options = email.sendGridTransportOptions;
-        const mockOptWithKeys = {service: 'sendGrid', auth: {auth_key: 'bar'}};
-        const mockOptWithPass = {service: 'sendGrid', auth: {user: 'bar', pass: 'baz'}};
+        const mockOptWithPass = {service: 'SendGrid', auth: {user: 'bar', pass: 'baz'}};
         
         it('should be a function',()=>{
             expect(options).instanceOf(Function);
@@ -49,8 +47,8 @@ describe('Testing email feature',()=>{
         it('should return correct options',()=>{
             expect(()=>options()).to.throw('incorrect options');
             expect(()=>options(['foo'])).to.throw('incorrect options');
+            expect(()=>options('foo')).to.throw('incorrect options');
             expect(()=>options(['foo'],'bar')).to.throw('incorrect options');
-            expect(options('bar')).to.be.deep.equal(mockOptWithKeys);
             expect(options('bar','baz')).to.be.deep.equal(mockOptWithPass);
             
         });
@@ -69,8 +67,8 @@ describe('Testing email feature',()=>{
             const emailOptions = {from: 'foo', to: 'bar', html: 'baz'};
 
             expect(()=>options()).to.throw('incorrect options');
-            expect(()=>options(1)).to.throw('incorrect options');
-            expect(()=>options([1],'foo')).to.throw('incorrect options');
+            expect(()=>options(1)).to.throw('incorrect option type');
+            expect(()=>options([1],'foo')).to.throw('incorrect option type');
             expect(()=>options(undefined)).to.throw('incorrect options');
             expect(()=>options('foo','bar')).to.throw('incorrect options');
             expect(options('foo','bar',undefined,'baz')).to.be.deep.equal(textOptions);
@@ -82,7 +80,7 @@ describe('Testing email feature',()=>{
         
         const {create, basicTransportOptions ,sendGridTransportOptions} = email;
         const emptyInstance = new create();
-        const mailInstance = new create(basicTransportOptions('foo','bar'));
+        const mailInstance = new create(basicTransportOptions('foo','bar','baz'));
         const sendGridInstance = new create(sendGridTransportOptions);
 
         it('shound create an instance',()=>{
