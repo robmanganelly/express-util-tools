@@ -14,7 +14,7 @@ const topLevel = (err, req, res, next)=>{
     let error;
 
     error = (!err.status)? new DefaultAppError(500) : err;
-    console.log(error);
+    console.log(process.env.NODE_ENV === 'production' ? 'error': error);
 
     let devError = {message: error.message, status:error.status, stack: err.stack };
     let prodError = {message: error.message, status:error.status};
