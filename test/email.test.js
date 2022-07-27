@@ -14,6 +14,7 @@ describe('Testing email feature',()=>{
         expect(email).to.have.property('sendGridTransportOptions');
         expect(email).to.have.property('test');
         expect(email).to.have.property('buildHTML');
+        expect(email).to.have.property('getTestMessageUrl');
     });
 
     describe('testing basicTransportOptions',()=>{
@@ -39,16 +40,17 @@ describe('Testing email feature',()=>{
     describe('testing sendGridTransportOptions',()=>{
         const options = email.sendGridTransportOptions;
         const mockOptWithPass = {service: 'SendGrid', auth: {user: 'bar', pass: 'baz'}};
+        const mockOptWithKey = {service: 'SendGrid', auth: {user: 'apikey', pass: 'bar'}};
         
         it('should be a function',()=>{
             expect(options).instanceOf(Function);
         });
 
         it('should return correct options',()=>{
-            expect(()=>options()).to.throw('incorrect options');
-            expect(()=>options(['foo'])).to.throw('incorrect options');
-            expect(()=>options('foo')).to.throw('incorrect options');
-            expect(()=>options(['foo'],'bar')).to.throw('incorrect options');
+            expect(()=>options()).to.throw('invalid options: empty');
+            expect(()=>options(['foo'])).to.throw('invalid options type');
+            expect(()=>options(['foo'],'bar')).to.throw('invalid options type');
+            expect(options('bar')).to.be.deep.equal(mockOptWithKey);
             expect(options('bar','baz')).to.be.deep.equal(mockOptWithPass);
             
         });

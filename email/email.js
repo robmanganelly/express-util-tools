@@ -19,9 +19,6 @@ module.exports.basicTransportOptions = (service, ...authOpt)=>{
             if( typeof v !== 'string') throw Error('incorrect options type');
         });
 
-    console.log('user,pass on basicTransportOptions:');
-    console.log(user,pass);
-    
     return {
         service,
         auth: {user,pass}
@@ -32,7 +29,18 @@ module.exports.basicTransportOptions = (service, ...authOpt)=>{
  * @param  {...string} auth 
  * @returns TransportOptions
  */
- module.exports.sendGridTransportOptions = (...auth)=>this.basicTransportOptions('SendGrid',...auth);
+ module.exports.sendGridTransportOptions = (...auth)=>{
+    
+    if(auth.length < 1) throw new Error('invalid options: empty');
+
+    let [user,pass] = auth;
+    
+    if (!pass) {pass = user; user = 'apikey'; }
+
+    if( typeof(user)!== 'string' || typeof(pass) !== 'string') throw new Error('invalid options type');
+    
+    return this.basicTransportOptions('SendGrid',user,pass);
+};
 
 //==========================================================
 //              Email options section
@@ -74,8 +82,6 @@ class Mailer{
      * @param  {{api_key:string}|{user: string, pass:string}} auth 
      */
     constructor(options){
-        console.log('options on calling constructor of Mailer class');
-        console.log(options);
         this.transport = !options ? null : nodemailer.createTransport(options);
         if(!this.transport) console.log('You have created an empty instance of mailer and must provide a valid transport on every send action');
     }
@@ -156,3 +162,8 @@ module.exports.create = Mailer;
 
     return assembled;
 };
+
+/**
+ * It simply exposes nodemailer.getTestMessageUrl to avoid requiring the package just for testing purposes. 
+ */
+module.exports.getTestMessageUrl = nodemailer.getTestMessageUrl;
