@@ -11,18 +11,17 @@ const fs = require('fs/promises');
  */
 module.exports.basicTransportOptions = (service, ...authOpt)=>{
     
-    const [auth_key] = authOpt;
     const [user, pass] = authOpt;
 
-    if( !service || !(auth_key || pass) ) throw Error('incorrect options');
+    if( !(service && user && pass) ) throw Error('incorrect options');
     [service,...authOpt].forEach(
         (v)=>{
-            if( typeof v !== 'string') throw Error('incorrect options');
+            if( typeof v !== 'string') throw Error('incorrect options type');
         });
 
     return {
         service,
-        auth: !pass ? { auth_key} : {user,pass}
+        auth: {user,pass}
     };
 };
 /**
@@ -30,7 +29,7 @@ module.exports.basicTransportOptions = (service, ...authOpt)=>{
  * @param  {...string} auth 
  * @returns TransportOptions
  */
- module.exports.sendGridTransportOptions = (...auth)=>this.basicTransportOptions('sendGrid',...auth);
+ module.exports.sendGridTransportOptions = (...auth)=>this.basicTransportOptions('SendGrid',...auth);
 
 //==========================================================
 //              Email options section
@@ -44,15 +43,15 @@ module.exports.basicTransportOptions = (service, ...authOpt)=>{
  */
 module.exports.basicEmailOptions = (...opts)=>{
     
-    if(opts.length < 1) throw Error('incorrect options');
+    if(opts.length === 0 ) throw Error('incorrect options: empty.');
 
     opts.forEach(
-      option=>{if(option && typeof(option) !== 'string') throw Error('incorrect options');}
+      option=>{if(option && typeof(option) !== 'string') throw Error('incorrect option type');}
     );
     
     
     const [from, to, subject, text, html] = opts;
-    if (!(from && to && (text || html))) throw Error('incorrect options');
+    if (!(from && to && (text || html))) throw Error('incorrect options: missing');
     
     let options = {from, to, subject, text, html};
 
@@ -73,7 +72,7 @@ class Mailer{
      */
     constructor(options){
         this.transport = !options ? null : nodemailer.createTransport(options);
-        if(!transport) console.log('You have created an empty instance of mailer and must provide a valid transport on every send action')
+        if(!transport) console.log('You have created an empty instance of mailer and must provide a valid transport on every send action');
     }
 
     async send(options,customTransport){    
