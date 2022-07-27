@@ -16,7 +16,7 @@ describe('Testing for all members to be available',()=>{
     });
     it('should export mailer ', ()=>{        
         expect(mailer).instanceOf(Object);
-        expect(Object.keys(mailer).length).to.be.equal(6);
+        expect(Object.keys(mailer).length).to.be.equal(7);
         Object.keys(mailer).forEach(k=>expect(mailer[k]).to.be.not.equal(undefined));
         Object.keys(mailer).forEach(k=>expect(mailer[k]).to.be.not.equal(null));
     });
