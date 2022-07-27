@@ -72,7 +72,7 @@ class Mailer{
      */
     constructor(options){
         this.transport = !options ? null : nodemailer.createTransport(options);
-        if(!transport) console.log('You have created an empty instance of mailer and must provide a valid transport on every send action');
+        if(!this.transport) console.log('You have created an empty instance of mailer and must provide a valid transport on every send action');
     }
 
     async send(options,customTransport){    
