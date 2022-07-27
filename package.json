@@ -1,9 +1,10 @@
 {
   "name": "express-util-tools",
-  "version": "2.6.1",
+  "version": "2.6.2-0",
   "description": "This package contains some utility functions to be used when building express applications",
   "main": "index.js",
   "scripts": {
+    "debug": "npm test",
     "test": "mocha"
   },
   "keywords": [
