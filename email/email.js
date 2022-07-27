@@ -19,7 +19,7 @@ module.exports.basicTransportOptions = (service, ...authOpt)=>{
             if( typeof v !== 'string') throw Error('incorrect options type');
         });
 
-    console.log('user,pass on basicTransportOptions');
+    console.log('user,pass on basicTransportOptions:');
     console.log(user,pass);
     
     return {
